@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin Name: Gridify Plus
- * Plugin URI: https://wordpress.org/plugins/gridify-plus/
+ * Plugin URI: https://github.com/WPXERO/gridify-plus.git
  * Description: This plugin will create Custom WooCommerce Product Grid for Elementor.
  * Version: 1.0.0
  * Author: wpxero
