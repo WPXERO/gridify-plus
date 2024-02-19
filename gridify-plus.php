@@ -20,7 +20,7 @@ use GridifyPlus\Widgets\Post_Grid;
 define('GRIDIFYPLUS_VERSION', '1.0.0');
 
 if (!defined('ABSPATH')) {
-    exit(__('Direct Access is not allowed', 'gridify-plus'));
+    exit(__('Direct script access denied.', 'gridify-plus')); // phpcs:ignore: WordPress.Security.EscapeOutput.OutputNotEscaped
 }
 
 final class GridifyPlus {
@@ -41,6 +41,7 @@ final class GridifyPlus {
     public function __construct() {
 
         add_action('plugins_loaded', [$this, 'gridifyplus']);
+        add_filter('unzip_file_use_ziparchive', '__return_false');
         $this->init_files();
     }
 
@@ -114,26 +115,18 @@ final class GridifyPlus {
     }
 
     public function admin_notice_missing_woocommerce_plugin() {
-        $message = sprintf(
-            esc_html__('"%1$s" requires "%2$s" to be installed and activated.', 'gridify-plus'),
-            '<strong>' . esc_html__('Gridify Plus', 'gridify-plus') . '</strong>',
-            '<strong>' . esc_html__('WooCommerce', 'gridify-plus') . '</strong>'
-        );
-        echo '<div class="notice notice-warning is-dismissible"><p>' . esc_html($message) . '</p></div>';
+        $message = sprintf('"%1$s" requires "%2$s" to be installed and activated.', '<strong>Gridify Plus</strong>', '<strong>Woocommerce</strong>');
+        echo '<div class="notice notice-warning is-dismissible"><p>' . wp_kses_post($message) . '</p></div>';
     }
     public function admin_notice_missing_main_plugin() {
-        if (isset($_GET['activate'])) unset($_GET['activate']);
-        $message = sprintf(
-            esc_html__('"%1$s" requires "%2$s" to be installed and activated.', 'gridify-plus'),
-            '<strong>' . esc_html__('Gridify Plus', 'gridify-plus') . '</strong>',
-            '<strong>' . esc_html__('Elementor', 'gridify-plus') . '</strong>'
-        );
-        echo '<div class="notice notice-warning is-dismissible"><p>' . esc_html($message) . '</p></div>';
+        if (isset($_GET['activate'])) unset($_GET['activate']); // phpcs:ignore WordPress.Security.NonceVerification
+        $message = sprintf('"%1$s" requires "%2$s" to be installed and activated.', '<strong>Gridify Plus</strong>', '<strong>Elementor</strong>');
+        echo '<div class="notice notice-warning is-dismissible"><p>' . wp_kses_post($message) . '</p></div>';
     }
 
     public function admin_notice_minimum_elementor_version() {
 
-        if (isset($_GET['activate'])) unset($_GET['activate']);
+        if (isset($_GET['activate'])) unset($_GET['activate']); // phpcs:ignore WordPress.Security.NonceVerification
 
         $message = sprintf(
             /* translators: 1: Plugin name 2: Elementor 3: Required Elementor version */
@@ -143,11 +136,11 @@ final class GridifyPlus {
             self::MINIMUM_ELEMENTOR_VERSION
         );
 
-        echo '<div class="notice notice-warning is-dismissible"><p>' . esc_html($message) . '</p></div>';
+        echo '<div class="notice notice-warning is-dismissible"><p>' . wp_kses_post($message) . '</p></div>';
     }
 
     public function admin_notice_minimum_php_version() {
-        if (isset($_GET['activate'])) unset($_GET['activate']);
+        if (isset($_GET['activate'])) unset($_GET['activate']); // phpcs:ignore WordPress.Security.NonceVerification
         $message = sprintf(
             /* translators: 1: Plugin name 2: PHP 3: Required PHP version */
             esc_html__('"%1$s" requires "%2$s" version %3$s or greater.', 'gridify-plus'),
@@ -156,7 +149,7 @@ final class GridifyPlus {
             self::MINIMUM_PHP_VERSION
         );
 
-        echo '<div class="notice notice-warning is-dismissible"><p>' . esc_html($message) . '</p></div>';
+        echo '<div class="notice notice-warning is-dismissible"><p>' . wp_kses_post($message) . '</p></div>';
     }
     /**
      * ! Widgets Init
