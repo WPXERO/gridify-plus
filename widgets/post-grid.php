@@ -143,7 +143,7 @@ class Post_Grid extends Widget_Base {
                 'type'        => Controls_Manager::TEXT,
                 'placeholder' => 'post_id',
                 'label_block' => true,
-                'description' => esc_html__('Write post id here, if you want to exclude multiple posts so use comma as separator. Such as 1 , 2', ''),
+                'description' => esc_html__('Write post id here, if you want to exclude multiple posts so use comma as separator. Such as 1 , 2', 'gridify-plus'),
             ]
         );
 
@@ -890,10 +890,10 @@ class Post_Grid extends Widget_Base {
                                         <div class="author-depertment">
                                             <?php
                                             $aid = get_the_author_meta('ID');
-                                            echo gridifyplus_get_user_role($aid);
+                                            echo esc_html(gridifyplus_get_user_role($aid));
                                             ?>
                                         </div>
-                                        <a class="name" href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>">
+                                        <a class="name" href="<?php echo esc_url(get_author_posts_url(get_the_author_meta('ID'))); ?>">
                                             <?php echo wp_kses_post(get_the_author()); ?>
                                         </a>
                                     </span>

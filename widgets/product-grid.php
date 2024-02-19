@@ -146,7 +146,7 @@ class Product_Grid extends Widget_Base {
                 'type'        => Controls_Manager::TEXT,
                 'placeholder' => 'product_id',
                 'label_block' => true,
-                'description' => esc_html__('Write product id here, if you want to exclude multiple products so use comma as separator. Such as 1 , 2', ''),
+                'description' => esc_html__('Write product id here, if you want to exclude multiple products so use comma as separator. Such as 1 , 2', 'gridify-plus'),
             ]
         );
 
@@ -969,7 +969,8 @@ class Product_Grid extends Widget_Base {
                                         <div class="author-depertment">
                                             <?php
                                             $aid = get_the_author_meta('ID');
-                                            echo gridifyplus_get_user_role($aid);
+                                            // echo gridifyplus_get_user_role($aid);
+                                            echo esc_html(gridifyplus_get_user_role($aid))
                                             ?>
                                         </div>
                                         <a class="name" href="<?php echo esc_url(get_author_posts_url(get_the_author_meta('ID'))); ?>">
