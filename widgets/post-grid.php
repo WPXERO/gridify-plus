@@ -126,7 +126,7 @@ class Post_Grid extends Widget_Base {
             [
                 'label'       => esc_html__('Categories', 'gridify-plus'),
                 'type'        => Controls_Manager::SELECT2,
-                'options'     => gridify_plus_get_category('category'),
+                'options'     => gridifyplus_get_category('category'),
                 'default'     => [],
                 'label_block' => true,
                 'multiple'    => true,
@@ -861,7 +861,7 @@ class Post_Grid extends Widget_Base {
     }
     public function render_custom_post_items() {
         $settings = $this->get_settings_for_display();
-        $wp_query = gridify_plus_posts_get_query($settings);
+        $wp_query = gridifyplus_posts_get_query($settings);
         if (!empty($wp_query)) :
             while ($wp_query->have_posts()) :
                 $wp_query->the_post();
@@ -883,23 +883,23 @@ class Post_Grid extends Widget_Base {
                             </a>
                             <div class="post-seller-wrap">
                                 <div class="post-seller-image">
-                                    <?php echo get_avatar(get_the_author_meta('ID'), 48); ?>
+                                    <?php echo wp_kses_post(get_avatar(get_the_author_meta('ID'), 48)); ?>
                                 </div>
                                 <div class="seller-info-wrap">
                                     <span class="author-name">
                                         <div class="author-depertment">
                                             <?php
                                             $aid = get_the_author_meta('ID');
-                                            echo gridify_plus_get_user_role($aid);
+                                            echo gridifyplus_get_user_role($aid);
                                             ?>
                                         </div>
                                         <a class="name" href="<?php echo get_author_posts_url(get_the_author_meta('ID')); ?>">
-                                            <?php echo get_the_author(); ?>
+                                            <?php echo wp_kses_post(get_the_author()); ?>
                                         </a>
                                     </span>
 
                                     <div class="post-category">
-                                        <?php echo $category; ?>
+                                        <?php echo wp_kses_post($category); ?>
                                     </div>
                                 </div>
                             </div>
@@ -922,7 +922,7 @@ class Post_Grid extends Widget_Base {
             </div>
             <?php if ($this->get_settings_for_display('show_pagination') === 'yes') : ?>
                 <div class="gridify-plus-pagination">
-                    <?php gridify_plus_pagination($settings);
+                    <?php gridifyplus_pagination($settings);
                     ?>
                 </div>
             <?php endif; ?>

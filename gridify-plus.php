@@ -17,14 +17,14 @@ namespace GridifyPlus;
 use GridifyPlus\Widgets\Product_Grid;
 use GridifyPlus\Widgets\Post_Grid;
 
-define('GRIDIFY_PLUS_VERSION', '1.0.0');
+define('gridifyplus_VERSION', '1.0.0');
 
 if (!defined('ABSPATH')) {
     exit(__('Direct Access is not allowed', 'gridify-plus'));
 }
 
 final class GridifyPlus {
-    const VERSION                   = GRIDIFY_PLUS_VERSION;
+    const VERSION                   = gridifyplus_VERSION;
     const MINIMUM_ELEMENTOR_VERSION = '3.0.0';
     const MINIMUM_PHP_VERSION       = '7.0';
 
@@ -40,7 +40,7 @@ final class GridifyPlus {
 
     public function __construct() {
 
-        add_action('plugins_loaded', [$this, 'gridify_plus']);
+        add_action('plugins_loaded', [$this, 'gridifyplus']);
         $this->init_files();
     }
 
@@ -53,7 +53,7 @@ final class GridifyPlus {
         load_plugin_textdomain('gridify-plus');
     }
 
-    public function gridify_plus() {
+    public function gridifyplus() {
 
         if ($this->is_compatible()) {
             add_action('elementor/init', [$this, 'init']);
@@ -119,7 +119,7 @@ final class GridifyPlus {
             '<strong>' . esc_html__('Gridify Plus', 'gridify-plus') . '</strong>',
             '<strong>' . esc_html__('WooCommerce', 'gridify-plus') . '</strong>'
         );
-        echo '<div class="notice notice-warning is-dismissible"><p>' . $message . '</p></div>';
+        echo '<div class="notice notice-warning is-dismissible"><p>' . esc_html($message ) . '</p></div>';
     }
     public function admin_notice_missing_main_plugin() {
         if (isset($_GET['activate'])) unset($_GET['activate']);
@@ -128,7 +128,7 @@ final class GridifyPlus {
             '<strong>' . esc_html__('Gridify Plus', 'gridify-plus') . '</strong>',
             '<strong>' . esc_html__('Elementor', 'gridify-plus') . '</strong>'
         );
-        echo '<div class="notice notice-warning is-dismissible"><p>' . $message . '</p></div>';
+        echo '<div class="notice notice-warning is-dismissible"><p>' . esc_html($message) . '</p></div>';
     }
 
     public function admin_notice_minimum_elementor_version() {
@@ -143,7 +143,7 @@ final class GridifyPlus {
             self::MINIMUM_ELEMENTOR_VERSION
         );
 
-        echo '<div class="notice notice-warning is-dismissible"><p>' . $message . '</p></div>';
+        echo '<div class="notice notice-warning is-dismissible"><p>' . esc_html($message) . '</p></div>';
     }
 
     public function admin_notice_minimum_php_version() {
@@ -156,7 +156,7 @@ final class GridifyPlus {
             self::MINIMUM_PHP_VERSION
         );
 
-        echo '<div class="notice notice-warning is-dismissible"><p>' . $message . '</p></div>';
+        echo '<div class="notice notice-warning is-dismissible"><p>' . esc_html($message) . '</p></div>';
     }
     /**
      * ! Widgets Init

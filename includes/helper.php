@@ -1,14 +1,14 @@
 <?php
 
-if (!function_exists('gridify_plus_get_user_role')) {
-    function gridify_plus_get_user_role($id) {
+if (!function_exists('gridifyplus_get_user_role')) {
+    function gridifyplus_get_user_role($id) {
         $user = new \WP_User($id);
         return array_shift($user->roles);
     }
 }
 
-if (!function_exists('gridify_plus_get_category')) {
-    function gridify_plus_get_category($taxonomy = 'category') {
+if (!function_exists('gridifyplus_get_category')) {
+    function gridifyplus_get_category($taxonomy = 'category') {
         $post_options = [];
         $post_categories = get_terms([
             'taxonomy'   => $taxonomy,
@@ -29,8 +29,8 @@ if (!function_exists('gridify_plus_get_category')) {
     }
 }
 
-if (!function_exists('gridify_plus_posts_get_query')) {
-    function gridify_plus_posts_get_query($settings) {
+if (!function_exists('gridifyplus_posts_get_query')) {
+    function gridifyplus_posts_get_query($settings) {
         if (get_query_var('paged')) {
             $paged = get_query_var('paged');
         } elseif (get_query_var('page')) {
@@ -144,10 +144,10 @@ if (!function_exists('gridify_plus_posts_get_query')) {
     }
 }
 
-if (!function_exists('gridify_plus_pagination')) {
-    function gridify_plus_pagination($settings) {
+if (!function_exists('gridifyplus_pagination')) {
+    function gridifyplus_pagination($settings) {
 
-        $wp_query = gridify_plus_posts_get_query($settings);
+        $wp_query = gridifyplus_posts_get_query($settings);
         /** Stop execution if there's only 1 page */
         if ($wp_query->max_num_pages <= 1) {
             return;
@@ -180,14 +180,14 @@ if (!function_exists('gridify_plus_pagination')) {
 
         /** Previous Post Link */
         if (get_previous_posts_link()) {
-            echo '<li>' . get_previous_posts_link('<span class="eicon-arrow-left"></span>') . '</li>' . "\n";
+            echo '<li>' . wp_kses_post(get_previous_posts_link('<span class="eicon-arrow-left"></span>')) . '</li>' . "\n";
         }
 
         /** Link to first page, plus ellipses if necessary */
         if (!in_array(1, $links)) {
             $class = 1 == $paged ? ' class="current"' : '';
 
-            echo '<li' . $class . '><a href="' . esc_url(get_pagenum_link(1)) . '" target="_self">1</a></li>' . "\n";
+            echo '<li' . esc_attr($class) . '><a href="' . esc_url(get_pagenum_link(1)) . '" target="_self">1</a></li>' . "\n";
 
             if (!in_array(2, $links)) {
                 echo '<li class="gridify-plus-pagination-dot-dot"><span>...</span></li>';
@@ -198,7 +198,7 @@ if (!function_exists('gridify_plus_pagination')) {
         sort($links);
         foreach ((array) $links as $link) {
             $class = $paged == $link ? ' class="gridify-plus-active"' : '';
-            echo '<li' . $class . '><a href="' . esc_url(get_pagenum_link($link)) . '" target="_self">' . $link . '</a></li>' . "\n";
+            echo '<li' . esc_attr($class) . '><a href="' . esc_url(get_pagenum_link($link)) . '" target="_self">' . esc_html($link) . '</a></li>' . "\n";
         }
 
         /** Link to last page, plus ellipses if necessary */
@@ -208,12 +208,12 @@ if (!function_exists('gridify_plus_pagination')) {
             }
 
             $class = $paged == $max ? ' class="gridify-plus-active"' : '';
-            echo '<li' . $class . '><a href="' . esc_url(get_pagenum_link($max)) . '" target="_self">' . $max . '</a></li>' . "\n";
+            echo '<li' . esc_attr($class) . '><a href="' . esc_url(get_pagenum_link($max)) . '" target="_self">' . esc_html($max) . '</a></li>' . "\n";
         }
 
         /** Next Post Link */
         if (get_next_posts_link()) {
-            echo '<li>' . get_next_posts_link('<span class="eicon-arrow-right"></span>') . '</li>' . "\n";
+            echo '<li>' . wp_kses_post(get_next_posts_link('<span class="eicon-arrow-right"></span>')) . '</li>' . "\n";
         }
 
         echo '</ul>' . "\n";
