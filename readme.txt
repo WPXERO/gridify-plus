@@ -4,11 +4,11 @@ Tags: post, product, grid, WooCommerce, author, wc
 Stable tag: 1.0.0
 Requires PHP: 7.0.0
 Requires at least: 5.0.0
-Tested up to: 6.4.2
+Tested up to: 6.4.3
 License: GPL3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.0.0
-Elementor tested up to: 3.19.0
+Elementor tested up to: 3.19.2
 
 The Gridify Plus Plugin for WooCommerce and Elementor is a powerful tool designed to enhance your e-commerce website's product display. This plugin enables you to create stunning product grids that not only showcase your merchandise beautifully but also provide essential information about the vendors.
 

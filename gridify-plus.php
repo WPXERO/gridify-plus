@@ -17,14 +17,14 @@ namespace GridifyPlus;
 use GridifyPlus\Widgets\Product_Grid;
 use GridifyPlus\Widgets\Post_Grid;
 
-define('gridifyplus_VERSION', '1.0.0');
+define('GRIDIFYPLUS_VERSION', '1.0.0');
 
 if (!defined('ABSPATH')) {
     exit(__('Direct Access is not allowed', 'gridify-plus'));
 }
 
 final class GridifyPlus {
-    const VERSION                   = gridifyplus_VERSION;
+    const VERSION                   = GRIDIFYPLUS_VERSION;
     const MINIMUM_ELEMENTOR_VERSION = '3.0.0';
     const MINIMUM_PHP_VERSION       = '7.0';
 
@@ -119,7 +119,7 @@ final class GridifyPlus {
             '<strong>' . esc_html__('Gridify Plus', 'gridify-plus') . '</strong>',
             '<strong>' . esc_html__('WooCommerce', 'gridify-plus') . '</strong>'
         );
-        echo '<div class="notice notice-warning is-dismissible"><p>' . esc_html($message ) . '</p></div>';
+        echo '<div class="notice notice-warning is-dismissible"><p>' . esc_html($message) . '</p></div>';
     }
     public function admin_notice_missing_main_plugin() {
         if (isset($_GET['activate'])) unset($_GET['activate']);
