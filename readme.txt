@@ -8,7 +8,7 @@ Tested up to: 6.4.3
 License: GPL3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Elementor requires at least: 3.0.0
-Elementor tested up to: 3.19.2
+Elementor tested up to: 3.19.4
 
 Gridify Plus: Transform your WooCommerce and Elementor sites with stunning product grids and vendor info. Perfect for blogs too!
 
